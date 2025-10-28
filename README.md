@@ -16,7 +16,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #eab566ff 0%, #764ba2 100%);
             min-height: 100vh;
             overflow-x: hidden;
         }
@@ -31,7 +31,7 @@
         }
 
         .app-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #667eea 0%, #8320e6ff 100%);
             color: white;
             padding: 15px 20px;
             display: flex;
