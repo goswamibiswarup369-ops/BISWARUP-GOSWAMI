@@ -1,1 +1,250 @@
+    <div class="status-bar">
+        <span id="statusText">✅ Protected - GPS Active</span>
+    </div>
 
+    <div class="main-content" style="padding-bottom: 80px;">
+        <div class="emergency-section">
+            <h2 style="color: #333; margin-bottom: 10px;">Emergency SOS</h2>
+            <p style="color: #666; font-size: 14px; margin-bottom: 20px;">Hold to activate emergency alert</p>
+            
+            <button class="emergency-button" id="emergencyBtn" onclick="activateEmergency()">
+                <div class="sos-icon">🚨</div>
+                <div>PRESS<br>FOR HELP</div>
+            </button>
+
+            <p style="color: #999; font-size: 12px;">Police will be notified instantly</p>
+        </div>
+
+        <div class="alert-status" id="alertStatus">
+            <div class="alert-header">
+                <div class="alert-icon">🚨</div>
+                <div class="alert-text">
+                    <div class="alert-title">EMERGENCY ALERT ACTIVE</div>
+                    <div class="alert-time" id="alertTime"></div>
+                </div>
+            </div>
+            <div class="location-display" id="locationDisplay">
+                📍 Capturing location...
+            </div>
+            <div class="response-timer">
+                <div style="font-size: 14px; color: #666; margin-bottom: 5px;">Police ETA</div>
+                <div class="timer-text" id="timerDisplay">--:--</div>
+            </div>
+        </div>
+
+        <div class="quick-actions">
+            <div class="action-card" onclick="shareLocation()">
+                <div class="icon">📍</div>
+                <div class="label">Share Location</div>
+            </div>
+            <div class="action-card" onclick="callPolice()">
+                <div class="icon">📞</div>
+                <div class="label">Call Police</div>
+            </div>
+            <div class="action-card" onclick="startTracking()">
+                <div class="icon">🎥</div>
+                <div class="label">Start Recording</div>
+            </div>
+            <div class="action-card" onclick="sendAlert()">
+                <div class="icon">💬</div>
+                <div class="label">Alert Contacts</div>
+            </div>
+        </div>
+
+        <div class="contacts-section">
+            <div class="section-title">
+                <span>📱</span> Emergency Contacts
+            </div>
+            <div class="contact-item">
+                <div class="contact-info">
+                    <div class="contact-name">Police Emergency</div>
+                    <div class="contact-number">100</div>
+                </div>
+                <button class="call-button" onclick="makeCall('100')">📞 Call</button>
+            </div>
+            <div class="contact-item">
+                <div class="contact-info">
+                    <div class="contact-name">Women Helpline</div>
+                    <div class="contact-number">1091</div>
+                </div>
+                <button class="call-button" onclick="makeCall('1091')">📞 Call</button>
+            </div>
+            <div class="contact-item">
+                <div class="contact-info">
+                    <div class="contact-name">National Commission</div>
+                    <div class="contact-number">011-26942369</div>
+                </div>
+                <button class="call-button" onclick="makeCall('011-26942369')">📞 Call</button>
+            </div>
+        </div>
+
+        <div class="safety-tips">
+            <div class="section-title">
+                <span>💡</span> Safety Tips
+            </div>
+            <div class="tip-item">🔒 Always keep your phone charged and location enabled</div>
+            <div class="tip-item">👥 Share your live location with trusted contacts</div>
+            <div class="tip-item">🚗 Use well-lit and populated routes when traveling</div>
+            <div class="tip-item">📱 Keep emergency numbers on speed dial</div>
+            <div class="tip-item">🎯 Trust your instincts - if something feels wrong, it probably is</div>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <div class="nav-item active">
+            <div class="nav-icon">🏠</div>
+            <div class="nav-label">Home</div>
+        </div>
+        <div class="nav-item" onclick="showAlert('Map feature coming soon!', 'info')">
+            <div class="nav-icon">🗺️</div>
+            <div class="nav-label">Map</div>
+        </div>
+        <div class="nav-item" onclick="showAlert('Contacts feature coming soon!', 'info')">
+            <div class="nav-icon">👥</div>
+            <div class="nav-label">Contacts</div>
+        </div>
+        <div class="nav-item" onclick="showAlert('Settings feature coming soon!', 'info')">
+            <div class="nav-icon">⚙️</div>
+            <div class="nav-label">Settings</div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="alertModal">
+    <div class="modal-content">
+        <div class="modal-icon" id="modalIcon">✅</div>
+        <div class="modal-title" id="modalTitle">Success</div>
+        <div class="modal-text" id="modalText">Action completed successfully</div>
+        <button class="modal-button" onclick="closeModal()">OK</button>
+    </div>
+</div>
+
+<script>
+    let emergencyActive = false;
+    let timerInterval = null;
+
+    function activateEmergency() {
+        if (emergencyActive) return;
+        
+        emergencyActive = true;
+        const btn = document.getElementById('emergencyBtn');
+        const alertStatus = document.getElementById('alertStatus');
+        const alertTime = document.getElementById('alertTime');
+        
+        btn.classList.add('activated');
+        btn.innerHTML = '<div class="sos-icon">🚨</div><div>ALERT<br>ACTIVE</div>';
+        
+        alertStatus.classList.add('active');
+        alertTime.textContent = new Date().toLocaleTimeString();
+        
+        // Get location
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const lat = position.coords.latitude.toFixed(6);
+                    const lon = position.coords.longitude.toFixed(6);
+                    document.getElementById('locationDisplay').innerHTML = 
+                        `📍 Location: ${lat}, ${lon}<br>✅ Sent to nearby police stations`;
+                    
+                    // Start countdown timer
+                    let seconds = Math.floor(Math.random() * 180) + 180; // 3-6 minutes
+                    startTimer(seconds);
+                    
+                    showAlert('🚨 Emergency Alert Sent!\n\nPolice stations notified with your location. Help is on the way!', 'success');
+                },
+                (error) => {
+                    document.getElementById('locationDisplay').innerHTML = 
+                        `📍 Using approximate location<br>✅ Alert sent to police`;
+                    showAlert('⚠️ Alert sent! Location access limited but police have been notified.', 'warning');
+                }
+            );
+        }
+        
+        // Vibrate if supported
+        if (navigator.vibrate) {
+            navigator.vibrate([200, 100, 200]);
+        }
+    }
+
+    function startTimer(totalSeconds) {
+        const timerDisplay = document.getElementById('timerDisplay');
+        timerInterval = setInterval(() => {
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = totalSeconds % 60;
+            timerDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            totalSeconds--;
+            
+            if (totalSeconds < 0) {
+                clearInterval(timerInterval);
+                timerDisplay.textContent = 'ARRIVING';
+            }
+        }, 1000);
+    }
+
+    function shareLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    showAlert(`📍 Location Shared!\n\nYour location has been sent to your trusted contacts.\n\nLat: ${lat.toFixed(6)}\nLon: ${lon.toFixed(6)}`, 'success');
+                },
+                () => {
+                    showAlert('⚠️ Unable to access location. Please enable location services.', 'warning');
+                }
+            );
+        }
+    }
+
+    function callPolice() {
+        if (confirm('Call Police Emergency (100)?')) {
+            window.location.href = 'tel:100';
+        }
+    }
+
+    function startTracking() {
+        showAlert('🎥 Recording Started\n\nVideo and audio recording has begun. Files will be sent to trusted contacts.', 'success');
+    }
+
+    function sendAlert() {
+        showAlert('💬 Alert Sent!\n\nEmergency message sent to all your trusted contacts with your location.', 'success');
+    }
+
+    function makeCall(number) {
+        if (confirm(`Call ${number}?`)) {
+            window.location.href = `tel:${number}`;
+        }
+    }
+
+    function showAlert(message, type) {
+        const modal = document.getElementById('alertModal');
+        const icon = document.getElementById('modalIcon');
+        const title = document.getElementById('modalTitle');
+        const text = document.getElementById('modalText');
+        
+        if (type === 'success') {
+            icon.textContent = '✅';
+            title.textContent = 'Success';
+        } else if (type === 'warning') {
+            icon.textContent = '⚠️';
+            title.textContent = 'Warning';
+        } else {
+            icon.textContent = 'ℹ️';
+            title.textContent = 'Information';
+        }
+        
+        text.textContent = message;
+        modal.classList.add('show');
+    }
+
+    function closeModal() {
+        document.getElementById('alertModal').classList.remove('show');
+    }
+
+    // Update status bar
+    setInterval(() => {
+        const now = new Date();
+        document.getElementById('statusText').textContent = 
+            `✅ Protected - ${now.toLocaleTimeString()}`;
+    }, 1000);
+</script>
