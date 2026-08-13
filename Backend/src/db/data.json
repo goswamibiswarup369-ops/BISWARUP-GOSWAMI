@@ -1,0 +1,175 @@
+{
+  "contacts": [
+    {
+      "id": 1,
+      "name": "Biswarup",
+      "phone": "8918413701",
+      "createdAt": "2026-08-13T15:41:37.763Z"
+    }
+  ],
+  "alerts": [
+    {
+      "id": 1,
+      "createdAt": "2026-07-25T19:02:15.261Z",
+      "lat": 28.6139,
+      "lon": 77.209,
+      "address": "New Delhi",
+      "message": "Test alert",
+      "smsResults": []
+    },
+    {
+      "id": 2,
+      "createdAt": "2026-07-26T06:29:10.397Z",
+      "lat": 23.6479,
+      "lon": 88.1284,
+      "address": "Katwa, Katwa - I, Purba Bardhaman, West Bengal, 713130, India",
+      "message": "I need help. I'm not safe right now.\nMy location: Katwa, Katwa - I, Purba Bardhaman, West Bengal, 713130, India\nMap: https://maps.google.com/?q=23.6479,88.1284\nPlease call me or send help — sharing this with my trusted contacts and the nearest police station.",
+      "smsResults": []
+    },
+    {
+      "id": 3,
+      "createdAt": "2026-07-26T06:32:51.383Z",
+      "lat": 23.6479,
+      "lon": 88.1284,
+      "address": "Katwa, Katwa - I, Purba Bardhaman, West Bengal, 713130, India",
+      "message": "I need help. I'm not safe right now.\nMy location: Katwa, Katwa - I, Purba Bardhaman, West Bengal, 713130, India\nMap: https://maps.google.com/?q=23.6479,88.1284\nPlease call me or send help — sharing this with my trusted contacts and the nearest police station.",
+      "smsResults": []
+    },
+    {
+      "id": 4,
+      "createdAt": "2026-07-26T06:35:06.845Z",
+      "lat": 23.6479,
+      "lon": 88.1284,
+      "address": "Katwa, Katwa - I, Purba Bardhaman, West Bengal, 713130, India",
+      "message": "I need help. I'm not safe right now.\nMy location: Katwa, Katwa - I, Purba Bardhaman, West Bengal, 713130, India\nMap: https://maps.google.com/?q=23.6479,88.1284\nPlease call me or send help — sharing this with my trusted contacts and the nearest police station.",
+      "smsResults": []
+    },
+    {
+      "id": 5,
+      "createdAt": "2026-07-26T06:43:34.620Z",
+      "lat": 23.6479,
+      "lon": 88.1284,
+      "address": "Katwa, Katwa - I, Purba Bardhaman, West Bengal, 713130, India",
+      "message": "I need help. I'm not safe right now.\nMy location: Katwa, Katwa - I, Purba Bardhaman, West Bengal, 713130, India\nMap: https://maps.google.com/?q=23.6479,88.1284\nPlease call me or send help — sharing this with Pradip Kumar Goswami and the nearest police station.",
+      "smsResults": [
+        {
+          "contact": "Pradip Kumar Goswami",
+          "phone": "7908360918",
+          "sent": false,
+          "reason": "Twilio credentials not configured (see backend/.env.example)"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "createdAt": "2026-07-26T06:57:47.064Z",
+      "lat": 23.6479,
+      "lon": 88.1284,
+      "address": "Katwa, Katwa - I, Purba Bardhaman, West Bengal, 713130, India",
+      "message": "I need help. I'm not safe right now.\nMy location: Katwa, Katwa - I, Purba Bardhaman, West Bengal, 713130, India\nMap: https://maps.google.com/?q=23.6479,88.1284\nPlease call me or send help — sharing this with Pradip Kumar Goswami and the nearest police station.",
+      "smsResults": [
+        {
+          "contact": "Pradip Kumar Goswami",
+          "phone": "7908360918",
+          "sent": false,
+          "reason": "Twilio credentials not configured (see backend/.env.example)"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "createdAt": "2026-07-26T07:07:09.272Z",
+      "lat": 23.6479,
+      "lon": 88.1284,
+      "address": "Katwa, Katwa - I, Purba Bardhaman, West Bengal, 713130, India",
+      "message": "I need help. I'm not safe right now.\nMy location: Katwa, Katwa - I, Purba Bardhaman, West Bengal, 713130, India\nMap: https://maps.google.com/?q=23.6479,88.1284\nPlease call me or send help — sharing this with Pradip Kumar Goswami and the nearest police station.",
+      "smsResults": [
+        {
+          "contact": "Pradip Kumar Goswami",
+          "phone": "7908360918",
+          "sent": false,
+          "reason": "Authentication Error - invalid username"
+        }
+      ],
+      "smsEnabled": "+12604656921"
+    },
+    {
+      "id": 8,
+      "createdAt": "2026-07-26T07:10:32.502Z",
+      "lat": 23.6479,
+      "lon": 88.1284,
+      "address": "Katwa, Katwa - I, Purba Bardhaman, West Bengal, 713130, India",
+      "message": "I need help. I'm not safe right now.\nMy location: Katwa, Katwa - I, Purba Bardhaman, West Bengal, 713130, India\nMap: https://www.google.co.in/maps/@24.0794098,88.2484665,8.59z?entry=ttu&g_ep=EgoyMDI2MDcyMi4wIKXMDSoASAFQAw%3D%3D\nPlease call me or send help — sharing this with Pradip Kumar Goswami and the nearest police station.",
+      "smsResults": [
+        {
+          "contact": "Pradip Kumar Goswami",
+          "phone": "7908360918",
+          "sent": false,
+          "reason": "Authentication Error - invalid username"
+        }
+      ],
+      "smsEnabled": "+12604656921"
+    },
+    {
+      "id": 9,
+      "createdAt": "2026-07-26T07:35:20.085Z",
+      "lat": 23.6479,
+      "lon": 88.1284,
+      "address": "Katwa, Katwa - I, Purba Bardhaman, West Bengal, 713130, India",
+      "message": "I need help. I'm not safe right now.\nMy location: Katwa, Katwa - I, Purba Bardhaman, West Bengal, 713130, India\nMap: https://www.google.co.in/maps/@24.0794098,88.2484665,8.59z?entry=ttu&g_ep=EgoyMDI2MDcyMi4wIKXMDSoASAFQAw%3D%3D\nPlease call me or send help — sharing this with Pradip Kumar Goswami and the nearest police station.",
+      "smsResults": [
+        {
+          "contact": "Pradip Kumar Goswami",
+          "phone": "7908360918",
+          "sent": false,
+          "reason": "Authentication Error - invalid username"
+        }
+      ],
+      "smsEnabled": "+12604656921"
+    },
+    {
+      "id": 10,
+      "createdAt": "2026-07-26T07:36:18.910Z",
+      "lat": 23.6479,
+      "lon": 88.1284,
+      "address": "Katwa, Katwa - I, Purba Bardhaman, West Bengal, 713130, India",
+      "message": "I need help. I'm not safe right now.\nMy location: Katwa, Katwa - I, Purba Bardhaman, West Bengal, 713130, India\nMap: https://www.google.co.in/maps/@24.0794098,88.2484665,8.59z?entry=ttu&g_ep=EgoyMDI2MDcyMi4wIKXMDSoASAFQAw%3D%3D\nPlease call me or send help — sharing this with Pradip Kumar Goswami and the nearest police station.",
+      "smsResults": [
+        {
+          "contact": "Pradip Kumar Goswami",
+          "phone": "7908360918",
+          "sent": false,
+          "reason": "Authentication Error - invalid username"
+        }
+      ],
+      "smsEnabled": "+12604656921"
+    },
+    {
+      "id": 11,
+      "createdAt": "2026-08-13T15:40:07.845Z",
+      "lat": 23.261841,
+      "lon": 88.317993,
+      "address": "Kalna - I, Purba Bardhaman, West Bengal, 713405, India",
+      "message": "I need help. I'm not safe right now.\nMy location: Kalna - I, Purba Bardhaman, West Bengal, 713405, India\nMap: https://www.google.co.in/maps/@24.0794098,88.2484665,8.59z?entry=ttu&g_ep=EgoyMDI2MDcyMi4wIKXMDSoASAFQAw%3D%3D\nPlease call me or send help — sharing this with my trusted contacts and the nearest police station.",
+      "smsResults": [],
+      "smsEnabled": "+12604656921"
+    },
+    {
+      "id": 12,
+      "createdAt": "2026-08-13T15:43:01.159Z",
+      "lat": 23.261841,
+      "lon": 88.317993,
+      "address": "Kalna - I, Purba Bardhaman, West Bengal, 713405, India",
+      "message": "I need help. I'm not safe right now.\nMy location: Kalna - I, Purba Bardhaman, West Bengal, 713405, India\nMap: https://www.google.co.in/maps/@24.0794098,88.2484665,8.59z?entry=ttu&g_ep=EgoyMDI2MDcyMi4wIKXMDSoASAFQAw%3D%3D\nPlease call me or send help — sharing this with Biswarup and the nearest police station.",
+      "smsResults": [
+        {
+          "contact": "Biswarup",
+          "phone": "8918413701",
+          "sent": false,
+          "reason": "Authentication Error - invalid username"
+        }
+      ],
+      "smsEnabled": "+12604656921"
+    }
+  ]
+}
