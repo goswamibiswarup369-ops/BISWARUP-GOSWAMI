@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rakshak Line — Reach help fast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="statusbar">
+  <div class="brand">
+    <div class="brand-dot"></div>
+    <div class="brand-name">Rakshak Line</div>
+  </div>
+  <div class="clock" id="clock">--:--</div>
+</div>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="eyebrow">Personal safety alert</div>
+    <h1>If something feels wrong,<br>hold the dial.</h1>
+    <p>Press and hold for two seconds to share your live location with nearby police stations and the people you trust. Holding — not tapping — keeps it from going off by accident.</p>
+  </div>
+
+  <div class="dial-wrap">
+    <div class="pulse" id="pulse1"></div>
+    <div class="pulse" id="pulse2" style="animation-delay:0.5s"></div>
+    <svg class="ring" viewBox="0 0 220 220" width="230" height="230">
+      <circle class="ring-track" cx="110" cy="110" r="104"></circle>
+      <circle class="ring-fill" id="ringFill" cx="110" cy="110" r="104"></circle>
+    </svg>
+    <button class="dial" id="dial">
+      <div class="dial-label" id="dialLabel">HOLD</div>
+      <div class="dial-sub" id="dialSub">to alert</div>
+    </button>
+  </div>
+  <div class="status-line" id="statusLine">Not activated</div>
+
+  <div class="log card" id="log">
+    <h3>Alert log</h3>
+    <div id="logItems"></div>
+  </div>
+
+  <div class="card" id="stationsCard" style="display:none;">
+    <div class="row">
+      <h3>Police stations near you</h3>
+      <span class="badge" id="stationCount"></span>
+    </div>
+    <div class="stations" id="stationsList"></div>
+  </div>
+
+  <div class="card" id="shareCard" style="display:none;">
+    <h3>Send your alert</h3>
+    <p class="note" style="margin-top:6px;">This app can't dispatch officers directly — no website can, without a police-integrated backend. Use the button below to open your phone's share sheet and send your live location and message to a station, a contact, or a helpline over SMS or WhatsApp.</p>
+    <div class="row" style="margin-top:12px;">
+      <button class="btn primary" id="shareBtn">Share alert message</button>
+      <button class="btn ghost" id="copyBtn">Copy text</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <h3>Trusted contacts</h3>
+      <span class="badge">included in every alert</span>
+    </div>
+    <div id="contactsList"></div>
+    <div class="contact-row">
+      <input type="text" id="cName" placeholder="Name">
+      <input type="tel" id="cPhone" placeholder="Phone number">
+      <button class="btn" id="addContact">Add</button>
+    </div>
+    <p class="note" id="contactNote"></p>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-bottom:12px;">Emergency numbers</h3>
+    <div class="em-strip">
+      <a class="em-chip" href="tel:112"><div class="n">112</div><div class="l">National emergency</div></a>
+      <a class="em-chip" href="tel:100"><div class="n">100</div><div class="l">Police</div></a>
+      <a class="em-chip" href="tel:1091"><div class="n">1091</div><div class="l">Women's helpline</div></a>
+      <a class="em-chip" href="tel:181"><div class="n">181</div><div class="l">Women in distress</div></a>
+    </div>
+    <p class="note">In immediate danger, call 112 or 100 directly — a phone call is faster and more reliable than any app. Confirm the numbers active in your state, as some helplines vary by region.</p>
+  </div>
+
+  <div class="footer">
+    Rakshak Line is a working prototype. It uses your device's own location and share tools —<br>
+    it is not connected to any police dispatch system. Please treat it as a first step, not a replacement<br>
+    for calling emergency services when you're in danger.
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
