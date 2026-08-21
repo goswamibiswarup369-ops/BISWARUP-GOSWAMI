@@ -3,9 +3,9 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 
-const contactsRoutes = require('./src/routes/contacts');
-const stationsRoutes = require('./src/routes/stations');
-const alertsRoutes = require('./src/routes/alerts');
+const contactsRoutes = require('./routes/contacts');
+const stationsRoutes = require('./routes/stations');
+const alertsRoutes = require('./routes/alerts');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,8 +13,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Serve the frontend as static files too, so `node server.js` alone is
-// enough to run the whole app on http://localhost:3000
+
 app.use(express.static(path.join(__dirname, '..', 'frontend')));
 
 app.use('/api/contacts', contactsRoutes);
