@@ -16,9 +16,13 @@ function haversine(lat1, lon1, lat2, lon2) {
  * Uses GET with query parameter (more reliable than POST with raw body)
  */
 async function fetchPoliceStations(lat, lon) {
-  const radii = [3000, 5000, 10000, 20000];
+  const radii = [3000, 5000, 10000, 20000, 35000];
   for (const r of radii) {
-    const query = `[out:json][timeout:15];node["amenity"="police"](around:${r},${lat},${lon});out;`;
+    // nwr = node + way + relation. Many real police stations are mapped as
+    // a building outline (way) or a grouped complex (relation), not a single
+    // point (node) — searching node-only silently misses most of those.
+    // "out center;" gives us a usable lat/lon for ways/relations too.
+    const query = `[out:json][timeout:20];nwr["amenity"="police"](around:${r},${lat},${lon});out center;`;
     const url = `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`;
     try {
       const response = await fetch(url, {
@@ -31,13 +35,25 @@ async function fetchPoliceStations(lat, lon) {
       const data = await response.json();
       if (data.elements && data.elements.length > 0) {
         return data.elements
-          .map(el => ({
-            name: el.tags.name || 'Police station',
-            phone: el.tags.phone || el.tags['contact:phone'] || null,
-            lat: el.lat,
-            lon: el.lon,
-            distanceKm: Number(haversine(lat, lon, el.lat, el.lon).toFixed(2))
-          }))
+          .map(el => {
+            // nodes have lat/lon directly; ways/relations expose it via "center"
+            const elLat = el.lat ?? el.center?.lat;
+            const elLon = el.lon ?? el.center?.lon;
+            if (elLat == null || elLon == null) return null;
+            return {
+              name: el.tags?.name || 'Police station',
+              phone: el.tags?.phone || el.tags?.['contact:phone'] || null,
+              lat: elLat,
+              lon: elLon,
+              distanceKm: Number(haversine(lat, lon, elLat, elLon).toFixed(2))
+            };
+          })
+          .filter(Boolean)
+          // de-duplicate: a station's building outline and a nearby node can
+          // both come back for the same place — collapse near-identical entries
+          .filter((s, i, arr) =>
+            arr.findIndex(o => o.name === s.name && Math.abs(o.distanceKm - s.distanceKm) < 0.05) === i
+          )
           .sort((a, b) => a.distanceKm - b.distanceKm)
           .slice(0, 6);
       }
@@ -48,8 +64,7 @@ async function fetchPoliceStations(lat, lon) {
   return [];
 }
 
-// GET /api/stations?lat=..&lon=..
-// Finds nearby police stations via OpenStreetMap's Overpass API.
+
 router.get('/', async (req, res) => {
   const lat = parseFloat(req.query.lat);
   const lon = parseFloat(req.query.lon);
@@ -61,8 +76,7 @@ router.get('/', async (req, res) => {
   res.json({ stations, searchRadiusMeters: 20000 });
 });
 
-// GET /api/stations/address?lat=..&lon=..
-// Reverse-geocodes coordinates to a readable address.
+
 router.get('/address', async (req, res) => {
   const { lat, lon } = req.query;
   if (!lat || !lon) {
@@ -81,4 +95,3 @@ router.get('/address', async (req, res) => {
 });
 
 module.exports = router;
-
